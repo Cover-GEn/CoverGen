@@ -1,39 +1,34 @@
 import React, { useState } from 'react';
 import './styles.css';
 
+// Industry templates (expandable)
 const coverLetterTemplates = {
-  IT: ({ jobTitle, experience, skills }) => `
-Dear Hiring Manager,
+  IT: ({ jobTitle, experience, skills, company }) => `
+Dear Hiring Manager at ${company},
 
-I am excited to apply for the ${jobTitle} position. With over ${experience} and expertise in ${skills}, I have developed strong problem-solving skills and a passion for cutting-edge technologies.
+I'm excited to apply for the ${jobTitle} role. With ${experience} and a skill set including ${skills}, I excel at solving complex technical problems and delivering scalable software.
 
-I am confident my background aligns well with your needs, and I look forward to contributing to your innovative team.
-
-Thank you for considering my application.
+Your company's commitment to innovation aligns with my drive to stay ahead of tech trends. I’d love the opportunity to contribute.
 
 Sincerely,
 [Your Name]
 `,
-  Marketing: ({ jobTitle, experience, skills }) => `
-Dear Hiring Team,
+  Finance: ({ jobTitle, experience, skills, company }) => `
+Dear Hiring Manager at ${company},
 
-As a passionate marketer with ${experience} experience in ${skills}, I am eager to bring creativity and data-driven strategies to the ${jobTitle} role.
+As a finance professional with ${experience}, I’m interested in the ${jobTitle} role. I bring proficiency in ${skills} and a proven record of improving fiscal performance.
 
-My ability to craft compelling campaigns and engage audiences will add value to your company.
+I’m confident I can deliver results that align with ${company}’s financial objectives.
 
-I appreciate your time and consideration.
-
-Best regards,
+Sincerely,
 [Your Name]
 `,
-  Healthcare: ({ jobTitle, experience, skills }) => `
-Dear Hiring Manager,
+  Education: ({ jobTitle, experience, skills, company }) => `
+Dear Hiring Committee,
 
-I am applying for the ${jobTitle} position, bringing ${experience} of healthcare experience and strong skills in ${skills}.
+I’m writing to express interest in the ${jobTitle} role at ${company}. With ${experience} and strong abilities in ${skills}, I believe I’m well-equipped to support student development and educational excellence.
 
-My dedication to patient care and teamwork makes me a perfect fit for your organization.
-
-Thank you for your consideration.
+Thank you for your time and consideration.
 
 Sincerely,
 [Your Name]
@@ -42,99 +37,85 @@ Sincerely,
 
 const resumeTemplates = {
   IT: ({ jobTitle, experience, skills, education, achievements }) => `
-[Your Name]
-[Your Contact Information]
+[Your Name] | [Email] | [Phone]
 
-Objective
----------
-Seeking the ${jobTitle} role to leverage ${experience} and skills in ${skills}.
+Objective:
+----------
+Seeking a ${jobTitle} role to apply ${experience}. Skilled in ${skills}.
 
-Education
----------
+Education:
+----------
 ${education}
 
-Experience & Achievements
--------------------------
+Experience:
+-----------
 ${achievements}
 `,
-  Marketing: ({ jobTitle, experience, skills, education, achievements }) => `
-[Your Name]
-[Your Contact Information]
+  Finance: ({ jobTitle, experience, skills, education, achievements }) => `
+[Your Name] | [Email] | [Phone]
 
-Profile
+Summary:
 --------
-Creative and data-driven marketer with ${experience} in ${skills}.
+Experienced finance professional applying for ${jobTitle}. Strengths: ${skills}.
 
-Education
----------
+Education:
+----------
 ${education}
 
-Key Achievements
------------------
-${achievements}
-`,
-  Healthcare: ({ jobTitle, experience, skills, education, achievements }) => `
-[Your Name]
-[Your Contact Information]
-
-Summary
---------
-Experienced healthcare professional with ${experience} and expertise in ${skills}.
-
-Education
----------
-${education}
-
-Professional Highlights
+Key Projects & Results:
 ------------------------
+${achievements}
+`,
+  Education: ({ jobTitle, experience, skills, education, achievements }) => `
+[Your Name] | [Email] | [Phone]
+
+Professional Summary:
+---------------------
+Education specialist with ${experience}, applying for ${jobTitle}. Strengths include ${skills}.
+
+Education:
+----------
+${education}
+
+Experience:
+-----------
 ${achievements}
 `,
 };
 
 function App() {
   const [activeTab, setActiveTab] = useState('coverLetter');
+  const [industry, setIndustry] = useState('IT');
   const [jobTitle, setJobTitle] = useState('');
   const [experience, setExperience] = useState('');
   const [skills, setSkills] = useState('');
+  const [company, setCompany] = useState('');
   const [education, setEducation] = useState('');
   const [achievements, setAchievements] = useState('');
-  const [industry, setIndustry] = useState('IT');
   const [result, setResult] = useState('');
 
   const generateContent = () => {
-    if (activeTab === 'coverLetter') {
-      const templateFn = coverLetterTemplates[industry];
-      if (!templateFn) {
-        setResult('Sorry, template not available for this industry.');
-        return;
-      }
-      const content = templateFn({ jobTitle, experience, skills });
-      setResult(content.trim());
-    } else {
-      // Resume
-      const templateFn = resumeTemplates[industry];
-      if (!templateFn) {
-        setResult('Sorry, template not available for this industry.');
-        return;
-      }
-      const content = templateFn({ jobTitle, experience, skills, education, achievements });
-      setResult(content.trim());
-    }
+    const isResume = activeTab === 'resume';
+    const templateFn = isResume ? resumeTemplates[industry] : coverLetterTemplates[industry];
+    if (!templateFn) return setResult('❌ Sorry, that industry is not yet supported.');
+
+    const content = templateFn({ jobTitle, experience, skills, company, education, achievements });
+    setResult(content.trim());
   };
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(result);
-    alert(`${activeTab === 'coverLetter' ? 'Cover letter' : 'Resume'} copied to clipboard!`);
+    alert(`${activeTab === 'resume' ? 'Resume' : 'Cover Letter'} copied to clipboard!`);
   };
 
   return (
     <div className="app">
       <header>
         <h1>📄 CoverGEN</h1>
-        <p>AI-Powered Resume & Cover Letter Generator</p>
+        <p>Your AI-powered cover letter & resume builder</p>
       </header>
 
-      <nav className="tab-nav">
+      <div className="tab-buttons">
         <button
           className={activeTab === 'coverLetter' ? 'active' : ''}
           onClick={() => {
@@ -153,15 +134,16 @@ function App() {
         >
           Resume
         </button>
-      </nav>
+      </div>
 
       <section className="form-section">
         <label>
-          Select Industry:
+          Industry:
           <select value={industry} onChange={(e) => setIndustry(e.target.value)}>
             <option value="IT">Information Technology</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Healthcare">Healthcare</option>
+            <option value="Finance">Finance</option>
+            <option value="Education">Education</option>
+            <!-- Add more options here -->
           </select>
         </label>
 
@@ -169,9 +151,19 @@ function App() {
           Job Title:
           <input
             type="text"
-            placeholder="e.g. Software Engineer"
+            placeholder="e.g. Frontend Developer"
             value={jobTitle}
             onChange={(e) => setJobTitle(e.target.value)}
+          />
+        </label>
+
+        <label>
+          Company Name:
+          <input
+            type="text"
+            placeholder="e.g. Google"
+            value={company}
+            onChange={(e) => setCompany(e.target.value)}
           />
         </label>
 
@@ -179,7 +171,7 @@ function App() {
           Experience Summary:
           <input
             type="text"
-            placeholder="e.g. 3 years developing web applications"
+            placeholder="e.g. 3+ years in SaaS product development"
             value={experience}
             onChange={(e) => setExperience(e.target.value)}
           />
@@ -189,7 +181,7 @@ function App() {
           Key Skills (comma-separated):
           <input
             type="text"
-            placeholder="e.g. JavaScript, teamwork, leadership"
+            placeholder="e.g. Python, Agile, APIs"
             value={skills}
             onChange={(e) => setSkills(e.target.value)}
           />
@@ -200,37 +192,35 @@ function App() {
             <label>
               Education:
               <textarea
-                placeholder="e.g. B.Sc. Computer Science, University XYZ, 2021"
+                placeholder="e.g. BSc in Computer Science, MIT, 2022"
                 value={education}
                 onChange={(e) => setEducation(e.target.value)}
-                rows={3}
+                rows={2}
               />
             </label>
 
             <label>
-              Achievements & Experience Details:
+              Key Achievements:
               <textarea
-                placeholder="e.g. Led project X, improved sales by 20%"
+                placeholder="e.g. Built a CRM system that increased sales by 35%"
                 value={achievements}
                 onChange={(e) => setAchievements(e.target.value)}
-                rows={4}
+                rows={3}
               />
             </label>
           </>
         )}
 
         <button className="generate-btn" onClick={generateContent}>
-          ✨ Generate {activeTab === 'coverLetter' ? 'Cover Letter' : 'Resume'}
+          ⚡ Generate {activeTab === 'coverLetter' ? 'Cover Letter' : 'Resume'}
         </button>
       </section>
 
       {result && (
         <section className="output-section">
           <h3>Your {activeTab === 'coverLetter' ? 'Cover Letter' : 'Resume'}:</h3>
-          <textarea readOnly value={result} rows={activeTab === 'coverLetter' ? 12 : 18} />
-          <button className="copy-btn" onClick={copyToClipboard}>
-            📋 Copy to Clipboard
-          </button>
+          <textarea readOnly value={result} rows={activeTab === 'resume' ? 18 : 14} />
+          <button className="copy-btn" onClick={copyToClipboard}>📋 Copy to Clipboard</button>
         </section>
       )}
     </div>
