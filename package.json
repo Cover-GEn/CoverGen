@@ -55,7 +55,7 @@
     "node": ">=16.0.0",
     "npm": ">=8.0.0"
   },
-  "browserlist": [
+  "browserslist": [
     ">0.2%",
     "not dead",
     "not op_mini all"
