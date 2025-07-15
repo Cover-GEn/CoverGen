@@ -1,83 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="theme-color" content="#3b82f6" />
+    <meta name="description" content="CoverGEN is the ultimate AI-powered resume and cover letter generator built for every industry. Instantly create, preview, and download ATS-optimized documents tailored to your career goals." />
+    <meta name="keywords" content="CoverGEN, AI resume, AI cover letter, resume builder, career, job application, professional resume, cover letter generator, ATS resume, resume template, job search" />
+    <meta name="author" content="CoverGEN Team" />
 
-  <title>CoverGEN - AI Resume & Cover Letter Generator</title>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://covergen.vercel.app/" />
+    <meta property="og:title" content="CoverGEN | AI Resume & Cover Letter Generator" />
+    <meta property="og:description" content="Instantly create professional resumes and cover letters tailored to your field with CoverGEN. Free and premium templates for every career stage." />
+    <meta property="og:image" content="https://covergen.vercel.app/og-image.png" />
 
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="CoverGEN helps you instantly generate professional resumes and cover letters using AI. Perfect for job seekers who want fast, personalized, and industry-specific job applications." />
-  <meta name="keywords" content="AI resume generator, cover letter generator, job application, CoverGEN, resume builder, cover letter help" />
-  <meta name="author" content="CoverGEN Team" />
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://covergen.vercel.app/" />
+    <meta name="twitter:title" content="CoverGEN | AI Resume & Cover Letter Generator" />
+    <meta name="twitter:description" content="AI-generated resumes and cover letters for every industry. ATS-optimized. Instant. Beautiful." />
+    <meta name="twitter:image" content="https://covergen.vercel.app/og-image.png" />
 
-  <!-- Open Graph for social sharing -->
-  <meta property="og:title" content="CoverGEN - AI Resume & Cover Letter Generator" />
-  <meta property="og:description" content="Instantly create professional resumes and cover letters tailored to your job applications. Powered by AI." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://covergen.vercel.app" />
-  <meta property="og:image" content="https://covergen.vercel.app/og-image.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="CoverGEN - AI Resume & Cover Letter Generator" />
-  <meta name="twitter:description" content="Instantly create professional resumes and cover letters tailored to your job applications. Powered by AI." />
-  <meta name="twitter:image" content="https://covergen.vercel.app/og-image.png" />
+    <!-- Web Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico" />
+    <!-- Title -->
+    <title>CoverGEN | AI Resume & Cover Letter Generator</title>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <!-- Inline Base Styles (optional for fallback) -->
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-  <!-- Base Styling -->
-  <style>
-    /* Reset & base */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #f8fafc;
+        color: #1e293b;
+        min-height: 100vh;
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
 
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #e6f0ff 0%, #f5f7fa 100%);
-      color: #1f2937;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+      #root {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px 16px;
+      }
 
-    #root {
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 30px 20px;
-    }
+      /* Smooth Scroll */
+      html {
+        scroll-behavior: smooth;
+      }
 
-    /* Scrollbar Styling */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #3b82f6;
-      border-radius: 10px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #2563eb;
-    }
+      /* Scrollbar Styling */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
 
-  </style>
-</head>
-<body>
-  <div id="root"></div>
-</body>
+      ::-webkit-scrollbar-track {
+        background: #e5e7eb;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: #3b82f6;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <!-- Optional future scripts here (analytics, chatbots, etc.) -->
+  </body>
 </html>
