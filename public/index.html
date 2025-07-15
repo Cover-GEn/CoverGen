@@ -3,36 +3,78 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>CoverGEN - AI Resume & Cover Letter Generator</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="CoverGEN helps you instantly generate professional resumes and cover letters using AI. Fast, simple, and personalized." />
-  <meta name="keywords" content="AI cover letter, resume builder, CoverGEN, job application, resume generator" />
+  <meta name="description" content="CoverGEN helps you instantly generate professional resumes and cover letters using AI. Perfect for job seekers who want fast, personalized, and industry-specific job applications." />
+  <meta name="keywords" content="AI resume generator, cover letter generator, job application, CoverGEN, resume builder, cover letter help" />
   <meta name="author" content="CoverGEN Team" />
 
-  <!-- Social Sharing -->
+  <!-- Open Graph for social sharing -->
   <meta property="og:title" content="CoverGEN - AI Resume & Cover Letter Generator" />
-  <meta property="og:description" content="Instantly generate professional resumes and cover letters with AI. Try it free!" />
+  <meta property="og:description" content="Instantly create professional resumes and cover letters tailored to your job applications. Powered by AI." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://covergen.vercel.app" />
   <meta property="og:image" content="https://covergen.vercel.app/og-image.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="CoverGEN - AI Resume & Cover Letter Generator" />
+  <meta name="twitter:description" content="Instantly create professional resumes and cover letters tailored to your job applications. Powered by AI." />
+  <meta name="twitter:image" content="https://covergen.vercel.app/og-image.png" />
 
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" />
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Base Styling -->
   <style>
+    /* Reset & base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background-color: #f5f7fa;
-      color: #222;
+      background: linear-gradient(135deg, #e6f0ff 0%, #f5f7fa 100%);
+      color: #1f2937;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
+
+    #root {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #2563eb;
+    }
+
   </style>
 </head>
 <body>
