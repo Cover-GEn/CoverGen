@@ -12,7 +12,8 @@
     "AI",
     "job application",
     "career",
-    "react"
+    "react",
+    "webapp"
   ],
   "homepage": "https://covergen.vercel.app",
   "repository": {
@@ -27,8 +28,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "eslint src/**/*.{js,jsx}",
-    "format": "prettier --write \"src/**/*.{js,jsx,json,css,md}\""
+    "lint": "eslint \"src/**/*.{js,jsx}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,json,css,md}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -37,10 +39,25 @@
   },
   "devDependencies": {
     "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.0",
     "prettier": "^2.8.4"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css,md}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=8.0.0"
-  }
+  },
+  "browserlist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }
