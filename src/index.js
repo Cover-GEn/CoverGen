@@ -1,53 +1,64 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import App from './App';
+import CoverLetter from './pages/CoverLetter';
+import ResumeBuilder from './pages/ResumeBuilder';
+import About from './pages/About';
+import NotFound from './pages/NotFound';
 import './styles.css';
 
-// Simple Error Boundary component to catch rendering errors
+// Future: Theme & Auth context can go here
+// import { ThemeProvider } from './context/ThemeContext';
+// import { AuthProvider } from './context/AuthContext';
+
+// 🔐 Error Boundary: Catches fatal rendering errors
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
   }
-  
-  static getDerivedStateFromError(error) {
+
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
-  
+
   componentDidCatch(error, errorInfo) {
-    console.error('Error caught by ErrorBoundary:', error, errorInfo);
+    console.error('❌ Error caught by ErrorBoundary:', error, errorInfo);
   }
-  
+
   render() {
     if (this.state.hasError) {
-      return <h2>Oops! Something went wrong. Please refresh or try again later.</h2>;
+      return (
+        <div style={{ padding: '2rem', textAlign: 'center' }}>
+          <h2>🚨 Something went wrong.</h2>
+          <p>Please refresh the page or contact support.</p>
+        </div>
+      );
     }
-    return this.props.children; 
+    return this.props.children;
   }
 }
 
-// Entry point of CoverGEN React app
+// 🌐 React Entry Point
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
     <ErrorBoundary>
-      <App />
+      {/* <ThemeProvider> */}
+      {/* <AuthProvider> */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/cover-letter" element={<CoverLetter />} />
+          <Route path="/resume-builder" element={<ResumeBuilder />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+      {/* </AuthProvider> */}
+      {/* </ThemeProvider> */}
     </ErrorBoundary>
   </React.StrictMode>
 );
-
-/*
-🚀 Future improvements you can add here:
-
-1. Integrate React Router for multi-page navigation:
-   - e.g., /about, /faq, /resume-builder, /cover-letter-builder
-   
-2. Add Analytics integrations:
-   - Google Analytics (via React GA or gtag)
-   - Vercel Analytics for traffic insights
-
-3. Add global context providers if needed (Auth, Theme, etc.)
-
-4. Set up performance monitoring and error reporting services
-*/
