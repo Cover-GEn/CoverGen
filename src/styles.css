@@ -52,11 +52,46 @@ header p {
   user-select: none;
 }
 
+/* Tab Navigation */
+.tab-nav {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  gap: 16px;
+}
+
+.tab-nav button {
+  padding: 14px 28px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  background: #e0e7ff;
+  border: none;
+  border-radius: 12px;
+  color: #334155;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.tab-nav button:hover {
+  background: #c7d2fe;
+  color: #1e40af;
+  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.5);
+}
+
+.tab-nav button.active {
+  background: #3b82f6;
+  color: white;
+  box-shadow: 0 6px 22px rgba(37, 99, 235, 0.7);
+  cursor: default;
+}
+
 /* Form Section */
 .form-section {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
   margin-bottom: 28px;
 }
 
@@ -68,18 +103,41 @@ header p {
   user-select: none;
 }
 
-.form-section input[type="text"] {
+.form-section input[type="text"],
+.form-section select,
+.form-section textarea {
   padding: 14px 16px;
   font-size: 1rem;
   border: 1.8px solid #cbd5e1; /* light slate */
   border-radius: 8px;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
   outline-offset: 2px;
+  font-family: inherit;
+  color: #1e293b;
+  resize: vertical;
 }
 
-.form-section input[type="text"]:focus {
+.form-section input[type="text"]:focus,
+.form-section select:focus,
+.form-section textarea:focus {
   border-color: #3b82f6;
-  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+  outline: none;
+}
+
+.form-section select {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #334155 50%),
+    linear-gradient(135deg, #334155 50%, transparent 50%),
+    linear-gradient(to right, #cbd5e1, #cbd5e1);
+  background-position:
+    calc(100% - 20px) calc(1em + 2px),
+    calc(100% - 15px) calc(1em + 2px),
+    calc(100% - 25px) 0.5em;
+  background-size: 5px 5px, 5px 5px, 1px 1.5em;
+  background-repeat: no-repeat;
+  cursor: pointer;
 }
 
 /* Generate Button */
@@ -92,12 +150,18 @@ header p {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.4s ease;
+  transition: background 0.4s ease, box-shadow 0.4s ease;
   user-select: none;
   box-shadow: 0 4px 14px rgba(59, 130, 246, 0.45);
 }
 
-.generate-btn:hover {
+.generate-btn:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.generate-btn:hover:not(:disabled) {
   background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%);
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
 }
@@ -149,7 +213,7 @@ header p {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
   box-shadow: 0 4px 12px rgba(37, 99, 235, 0.5);
 }
@@ -170,11 +234,14 @@ header p {
     font-size: 2.2rem;
   }
 
-  .form-section input[type="text"] {
+  .form-section input[type="text"],
+  .form-section select,
+  .form-section textarea {
     font-size: 0.95rem;
   }
 
-  .generate-btn, .copy-btn {
+  .generate-btn,
+  .copy-btn {
     font-size: 1rem;
     padding: 12px 0;
   }
